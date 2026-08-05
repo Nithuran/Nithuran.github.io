@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nithuran Pathmanathan — Data Scientist</title>
+<title>Nithuran Pathmanathan - Data Scientist</title>
 <meta name="description" content="Portfolio of data science and machine learning projects by Nithuran Pathmanathan.">
-<meta property="og:title" content="Nithuran Pathmanathan — Data Scientist">
+<meta property="og:title" content="Nithuran Pathmanathan - Data Scientist">
 <meta property="og:description" content="Forecasting, NLP, and classification projects from the University of Cambridge Data Science, ML & AI Career Accelerator.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
@@ -20,8 +20,8 @@
     --paper-2:    #F3EAD6;
     --ink:        #2E2A22;
     --ink-soft:   #6E6455;
-    --evergreen:  #2F5D50;
-    --evergreen-d:#254A40;
+    --evergreen:  #1F4E79;
+    --evergreen-d:#173C5E;
     --honey:      #D98E3F;
     --line:       rgba(46,42,34,0.12);
     --card:       #FFFDF8;
@@ -68,6 +68,7 @@
     html{ scroll-behavior:auto; }
     .reveal{ opacity:1; transform:none; transition:none; }
     *{ animation:none !important; }
+    .btn, .btn::before, .card, .skill-pill, .card-chart img{ transition:none !important; }
   }
 
   /* ---------- NAV ---------- */
@@ -179,15 +180,23 @@
   }
   .hero-cta{ display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
   .btn{
+    position:relative; overflow:hidden;
     font-size:14.5px; font-weight:500;
     padding:13px 24px; border-radius:28px; text-decoration:none;
     display:inline-flex; align-items:center; gap:8px;
-    transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, background 0.2s ease, border-color 0.2s ease;
   }
+  .btn::before{
+    content:''; position:absolute; top:0; left:-75%; width:50%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform:skewX(-20deg); transition:left 0.55s ease;
+  }
+  .btn:hover::before{ left:125%; }
+  .btn:active{ transform:scale(0.97) !important; }
   .btn-primary{ background:var(--evergreen); color:var(--paper); }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(47,93,80,0.28); }
+  .btn-primary:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 14px 28px rgba(47,93,80,0.32); }
   .btn-ghost{ border:1.5px solid var(--line); color:var(--ink); background:var(--card); }
-  .btn-ghost:hover{ border-color:var(--honey); transform:translateY(-2px); }
+  .btn-ghost:hover{ border-color:var(--honey); transform:translateY(-3px) scale(1.03); box-shadow:0 14px 24px rgba(46,42,34,0.10); }
 
   .trust-row{
     margin-top:56px; display:flex; align-items:center; gap:14px;
@@ -319,30 +328,85 @@
 
   /* ---------- CONTACT ---------- */
   .contact-card{
-    background:var(--evergreen); color:var(--paper);
+    background:var(--card); border:1px solid var(--line);
+    color:var(--ink);
     border-radius:28px; padding:64px 56px;
-    display:flex; flex-direction:column; align-items:flex-start; gap:24px;
+    display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;
     position:relative; overflow:hidden;
   }
   .contact-card::before{
     content:''; position:absolute; width:280px; height:280px; border-radius:50%;
-    background:var(--honey); opacity:0.18; top:-100px; right:-80px;
+    background:var(--honey); opacity:0.14; top:-120px; right:-90px;
+  }
+  .contact-card::after{
+    content:''; position:absolute; width:220px; height:220px; border-radius:50%;
+    background:var(--evergreen); opacity:0.10; bottom:-100px; left:-70px;
   }
   .contact-title{
     font-family:var(--display); font-weight:600;
-    font-size:clamp(28px,4vw,40px); max-width:560px; position:relative; z-index:1;
+    font-size:clamp(28px,4vw,38px); position:relative; z-index:1;
   }
-  .contact-sub{ color:rgba(251,246,236,0.8); max-width:480px; position:relative; z-index:1; }
-  .contact-links{ display:flex; gap:14px; flex-wrap:wrap; position:relative; z-index:1; }
-  .contact-links a{
-    font-size:14px; font-weight:500; text-decoration:none;
-    background:rgba(251,246,236,0.12); border:1px solid rgba(251,246,236,0.3);
-    padding:11px 20px; border-radius:24px; color:var(--paper);
-    transition:background 0.2s ease, transform 0.2s ease;
+  .contact-sub{
+    color:var(--ink-soft); max-width:460px; position:relative; z-index:1;
   }
-  .contact-links a:hover{ background:rgba(251,246,236,0.22); transform:translateY(-2px); }
+  .contact-icons{
+    display:flex; gap:28px; flex-wrap:wrap; justify-content:center;
+    margin-top:36px; position:relative; z-index:1;
+  }
+  .contact-icon{
+    position:relative;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink);
+  }
+  .contact-tooltip{
+    position:absolute; top:-38px; left:50%; transform:translateX(-50%) translateY(4px);
+    background:var(--ink); color:var(--paper); font-size:12px; font-weight:500;
+    padding:6px 12px; border-radius:16px; white-space:nowrap;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.2s ease, transform 0.2s ease;
+  }
+  .contact-tooltip::after{
+    content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%);
+    border:5px solid transparent; border-top-color:var(--ink);
+  }
+  .contact-icon:hover .contact-tooltip{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .contact-icon-badge{
+    width:64px; height:64px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(46,42,34,0.10);
+    transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  }
+  .contact-icon-badge svg{ width:28px; height:28px; }
+  .contact-icon:hover .contact-icon-badge{
+    transform:translateY(-6px) rotate(-6deg) scale(1.08);
+    box-shadow:0 14px 26px rgba(46,42,34,0.18);
+  }
+  .contact-icon span{ font-size:13.5px; font-weight:500; color:var(--ink-soft); }
+  .contact-icon:hover span{ color:var(--ink); }
+  .badge-github{ background:#1b1f24; }
+  .badge-linkedin{ background:#0a66c2; }
+  .badge-email{ background:var(--honey); }
 
-  @media (max-width:640px){ .contact-card{ padding:40px 28px; } }
+  .explore-more{
+    margin-top:52px; position:relative; z-index:1;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .explore-more p{ font-family:var(--display); font-weight:600; font-size:15px; color:var(--ink-soft); }
+  .explore-links{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .explore-links a{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13.5px; font-weight:500; text-decoration:none; color:var(--ink);
+    background:var(--paper-2); border:1px solid var(--line);
+    padding:9px 18px 9px 10px; border-radius:24px;
+    transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s ease, background 0.2s ease;
+  }
+  .explore-links a .arrow-dot{
+    width:20px; height:20px; border-radius:50%; background:var(--honey); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;
+  }
+  .explore-links a:hover{ transform:translateY(-3px) scale(1.04); border-color:var(--honey); background:var(--card); }
+
+  @media (max-width:640px){ .contact-card{ padding:40px 24px; } }
 
   footer{ padding:36px 32px; text-align:center; }
   footer p{ font-size:13px; color:var(--ink-soft); }
@@ -378,10 +442,10 @@
         points="0,400 70,385 140,392 210,350 280,365 350,310 420,325 490,265 560,280 630,215 700,230 770,165 840,178 910,110 980,125 1040,80" />
     </svg>
     <div class="wrap hero-inner">
-      <p class="eyebrow reveal is-visible"><span class="wave">👋</span> Hi, I'm Nithuran — Data Scientist / ML Engineer</p>
+      <p class="eyebrow reveal is-visible"><span class="wave">👋</span> Hi, I'm Nithuran - Data Scientist / ML Engineer</p>
       <h1 class="name reveal is-visible reveal-1">I turn <span class="accent">messy data</span> into decisions people trust.</h1>
       <p class="role-line reveal is-visible reveal-2">
-        Cambridge-trained in Data Science, Machine Learning &amp; AI — I build forecasting, NLP, and classification
+        Cambridge-trained in Data Science, Machine Learning &amp; AI - I build forecasting, NLP, and classification
         models end to end, and explain them clearly enough for a non-technical stakeholder to act on.
       </p>
       <div class="hero-cta reveal is-visible reveal-3">
@@ -411,20 +475,26 @@
         <div class="about-text reveal">
           <p class="section-eyebrow">About</p>
           <p style="font-family:var(--display); font-size:22px; font-weight:500; color:var(--ink); margin-bottom:20px;">
-            I like problems where the data is messy, the stakeholders are impatient, and the answer actually changes what someone does next.
+            I like problems where the data is messy and the answer actually changes what someone does next.
           </p>
           <p>
-            My background is in QA engineering and infrastructure security at BT, where four years of analysing
-            large-scale operational and vulnerability data — and building the automation to make sense of it —
-            is what pulled me toward data science in the first place. I completed the University of Cambridge's
+            I started at BT as a <strong>Developer</strong> - gathering requirements straight from users, building
+            the features they actually needed, and debugging everything before it shipped to production. That
+            hands-on instinct carried into <strong>QA Engineering</strong>, where I owned test strategy, automated
+            regression testing, and led sign-off on major releases. Most recently I moved into
+            <strong> Infrastructure Security Operations</strong>, working with large-scale vulnerability data to
+            decide what gets fixed and when.
+          </p>
+          <p>
+            Data science felt like the natural next step. It's the same instinct as before: take messy, high-volume
+            data and turn it into something someone can act on. I completed the University of Cambridge's
             <strong> Data Science, Machine Learning &amp; AI Career Accelerator</strong> to formalise that shift,
-            working through the full pipeline — cleaning, exploration, modelling, evaluation, and communication —
-            across six independent projects.
+            working through six independent projects end to end.
           </p>
           <p>
-            I'm comfortable moving between classical statistics and modern ML (SARIMAX to XGBoost to transformer
-            time-series models), and I care just as much about explaining <em>why</em> a model works as making it
-            perform well. I'm now looking for a data science or analytics role where I can do exactly that.
+            I move comfortably between classical statistics and modern ML - SARIMAX to XGBoost to transformer
+            time-series models. I care as much about explaining <em>why</em> a model works as making it perform
+            well. I'm now looking for a data science or analytics role where I can do exactly that.
           </p>
         </div>
         <div class="stat-grid reveal reveal-2">
@@ -493,9 +563,8 @@
   <section class="section" id="projects">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="section-eyebrow">Projects</p>
-        <h2 class="section-title">Work from the Cambridge accelerator</h2>
-        <p class="section-sub">Six projects, six very different problems — forecasting, NLP, clustering, anomaly detection, and classification.</p>
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">Six projects, six very different problems - forecasting, NLP, clustering, anomaly detection, and classification.</p>
       </div>
       <div class="project-grid" id="project-grid"><!-- injected by JS from PROJECTS array below --></div>
     </div>
@@ -507,12 +576,12 @@
       <div class="section-head reveal">
         <p class="section-eyebrow">Experience</p>
         <h2 class="section-title">Where I've worked</h2>
-        <p class="section-sub">Four years at BT, moving from QA engineering into infrastructure security and data-driven operations.</p>
+        <p class="section-sub">Four-plus years at BT, moving from software development into QA, then into infrastructure security.</p>
       </div>
 
       <div class="timeline reveal reveal-1">
         <div class="timeline-item">
-          <div class="timeline-date">Nov 2025 — Present</div>
+          <div class="timeline-date">Dec 2025 - Present</div>
           <div class="timeline-title">Infrastructure Security Operations Engineer</div>
           <div class="timeline-sub">BT, London</div>
           <ul class="timeline-list">
@@ -523,14 +592,25 @@
           </ul>
         </div>
         <div class="timeline-item">
-          <div class="timeline-date">Sep 2021 — Nov 2025</div>
+          <div class="timeline-date">Oct 2023 - Dec 2025</div>
           <div class="timeline-title">QA Engineer</div>
           <div class="timeline-sub">BT, Birmingham</div>
           <ul class="timeline-list">
+            <li>Built a modular Selenium/Python testing framework from the ground up, cutting UI regression time by 40%</li>
+            <li>Wrote automation scripts for 60+ regression scenarios, reducing manual testing effort by 25%</li>
             <li>Designed and ran 250+ functional and regression tests per quarter across ServiceNow security workflows</li>
-            <li>Automated 60+ regression scenarios, cutting manual testing effort by 25%</li>
-            <li>Built a modular Selenium/Python testing framework that reduced UI regression time by 40%</li>
             <li>QA sign-off lead on 6+ major releases; mentored 2 junior testers</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Sep 2021 - Oct 2023</div>
+          <div class="timeline-title">Developer</div>
+          <div class="timeline-sub">BT, Birmingham</div>
+          <ul class="timeline-list">
+            <li>Gathered requirements from users and stakeholders through 1-on-1 meetings, team discussions, and ticket queues, translating them into shippable features</li>
+            <li>Designed, built, and shipped 25+ features end-to-end, from requirement gathering through to production</li>
+            <li>Debugged and resolved issues pre-release, catching bugs before they reached production</li>
+            <li>Owned the full feature lifecycle - from user conversation to code in production</li>
           </ul>
         </div>
       </div>
@@ -547,12 +627,12 @@
 
       <div class="timeline reveal reveal-1">
         <div class="timeline-item">
-          <div class="timeline-date">Jan 2025 — Dec 2025</div>
-          <div class="timeline-title">Data Science, Machine Learning &amp; AI Career Accelerator</div>
+          <div class="timeline-date">Jan 2025 - Dec 2025</div>
+          <div class="timeline-title">Data Science, Machine Learning &amp; AI</div>
           <div class="timeline-sub">University of Cambridge, PACE (Postgraduate Academic Centre for Executives)</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-date">2017 — 2021</div>
+          <div class="timeline-date">2017 - 2021</div>
           <div class="timeline-title">BSc Mathematics &amp; Accounting and Finance</div>
           <div class="timeline-sub">University of Kent</div>
         </div>
@@ -564,13 +644,40 @@
   <section class="section" id="contact">
     <div class="wrap">
       <div class="contact-card reveal">
-        <p class="contact-title">Open to data science &amp; ML roles — let's talk.</p>
-        <p class="contact-sub">The fastest way to reach me is email. I usually reply within a day.</p>
-        <div class="contact-links">
-          <a href="mailto:pnithu1999@gmail.com">pnithu1999@gmail.com</a>
-          <a href="tel:07540421011">07540 421011</a>
-          <a href="https://www.linkedin.com/in/nithuran-pathmanathan-13a636129" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/Nithuran" target="_blank" rel="noopener">GitHub</a>
+        <p class="contact-title">Let's connect!</p>
+        <p class="contact-sub">Open to data science &amp; ML roles - feel free to reach out for opportunities, questions about my projects, or just to chat. I usually reply within a day.</p>
+
+        <div class="contact-icons">
+          <a class="contact-icon" href="https://github.com/Nithuran" target="_blank" rel="noopener">
+            <span class="contact-tooltip">github.com/Nithuran</span>
+            <div class="contact-icon-badge badge-github">
+              <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55 0-.27-.01-1-.02-1.96-3.2.7-3.87-1.54-3.87-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </div>
+            <span>GitHub</span>
+          </a>
+          <a class="contact-icon" href="https://www.linkedin.com/in/nithuran-pathmanathan-13a636129" target="_blank" rel="noopener">
+            <span class="contact-tooltip">View LinkedIn profile</span>
+            <div class="contact-icon-badge badge-linkedin">
+              <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.75h3.5V21H3.2V8.75Zm6.5 0h3.35v1.68h.05c.47-.88 1.6-1.8 3.3-1.8 3.53 0 4.18 2.32 4.18 5.34V21h-3.5v-6.34c0-1.51-.03-3.45-2.1-3.45-2.1 0-2.42 1.64-2.42 3.34V21H9.7V8.75Z"/></svg>
+            </div>
+            <span>LinkedIn</span>
+          </a>
+          <a class="contact-icon" href="mailto:pnithu1999@gmail.com" id="emailIcon">
+            <span class="contact-tooltip" id="emailTooltip">pnithu1999@gmail.com</span>
+            <div class="contact-icon-badge badge-email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
+            </div>
+            <span>Email</span>
+          </a>
+        </div>
+
+        <div class="explore-more">
+          <p>Wanna explore more?</p>
+          <div class="explore-links">
+            <a href="#top"><span class="arrow-dot">↑</span> Home</a>
+            <a href="#about"><span class="arrow-dot">→</span> About</a>
+            <a href="#projects"><span class="arrow-dot">→</span> Projects</a>
+          </div>
         </div>
       </div>
     </div>
@@ -585,14 +692,14 @@
 <script>
 /* ============================================================
    EDIT YOUR PROJECTS HERE.
-   Add / remove / change entries — cards build automatically.
+   Add / remove / change entries - cards build automatically.
    Leave "github" or "demo" as "" to hide that link on a card.
    ============================================================ */
 const PROJECTS = [
   {
     title: "Forecasting Children's & Fiction Book Sales",
     result: "13.0% MAPE",
-    description: "Forecasted 24 years of weekly UK sales for two very different titles — The Very Hungry Caterpillar and The Alchemist — comparing a classical statistical model against gradient boosting.",
+    description: "Forecasted 24 years of weekly UK sales for two very different titles - The Very Hungry Caterpillar and The Alchemist - comparing a classical statistical model against gradient boosting.",
     task: "Time series forecasting",
     method: "STL decomposition, ADF stationarity testing, SARIMAX vs. XGBoost with lag & rolling-window features, hyperparameter tuning",
     data: "24 years of weekly UK book sales (2000–2024)",
@@ -619,7 +726,7 @@ const PROJECTS = [
     title: "PureGym Review Intelligence",
     result: "30k+ reviews mined",
     description: "Mined a year of PureGym reviews from Google and Trustpilot to find the real drivers of dissatisfaction, going beyond star ratings to locate where and why members were frustrated.",
-    task: "NLP — topic modelling & emotion classification",
+    task: "NLP - topic modelling & emotion classification",
     method: "BERTopic (UMAP + HDBSCAN) for topic clusters, BERT-based emotion classifier, negative-review drill-down by location",
     data: "30,500+ reviews across 500+ gym locations, 12-month window",
     tags: ["Python", "NLP", "BERTopic", "Transformers"],
@@ -632,7 +739,7 @@ const PROJECTS = [
     title: "Customer Segmentation with Clustering",
     result: "4 segments, 68k customers",
     description: "Segmented 68,300 customers from nearly a million transactions into behavioural groups, turning raw purchase history into clear, actionable marketing personas.",
-    task: "Unsupervised learning — customer segmentation",
+    task: "Unsupervised learning - customer segmentation",
     method: "RFM-style feature engineering, K-Means with elbow & silhouette selection, PCA and t-SNE for visual validation",
     data: "951,669 transactions across 68,300 unique customers",
     tags: ["Python", "K-Means", "PCA", "t-SNE"],
@@ -644,7 +751,7 @@ const PROJECTS = [
   {
     title: "Predicting Student Course Completion",
     result: "97% accuracy",
-    description: "Built a staged early-warning system for student drop-out, showing how prediction accuracy jumps once academic performance data becomes available — pointing to exactly when to intervene.",
+    description: "Built a staged early-warning system for student drop-out, showing how prediction accuracy jumps once academic performance data becomes available - pointing to exactly when to intervene.",
     task: "Binary classification, staged data-availability comparison",
     method: "XGBoost vs. feed-forward neural network across three data stages (demographics → attendance → academic performance), hyperparameter tuning, feature importance",
     data: "Enrolment, attendance & academic records across multiple UK study centres",
@@ -702,6 +809,23 @@ function projectCard(p, i){
 
 document.getElementById("project-grid").innerHTML = PROJECTS.map(projectCard).join("");
 
+/* ---------- email icon: copy to clipboard as a fallback ---------- */
+const emailIcon = document.getElementById("emailIcon");
+const emailTooltip = document.getElementById("emailTooltip");
+if (emailIcon && emailTooltip) {
+  emailIcon.addEventListener("click", (e) => {
+    const email = "pnithu1999@gmail.com";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(() => {
+        const original = emailTooltip.textContent;
+        emailTooltip.textContent = "Copied!";
+        setTimeout(() => { emailTooltip.textContent = original; }, 1800);
+      }).catch(() => {});
+    }
+    // let the mailto: link still attempt to open a mail client as normal
+  });
+}
+
 /* ---------- mobile nav toggle ---------- */
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
@@ -738,7 +862,8 @@ if ("IntersectionObserver" in window) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        io.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove("is-visible");
       }
     });
   }, { threshold: 0.15 });
