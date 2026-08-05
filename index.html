@@ -260,6 +260,18 @@
 
   /* ---------- PROJECTS ---------- */
   .project-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
+  .card-featured{ grid-column:1 / -1; }
+  .card-featured .card-chart{ aspect-ratio:21/9; }
+  .featured-badge{
+    display:inline-flex; align-items:center; gap:5px; width:fit-content;
+    font-size:11.5px; font-weight:600; color:var(--evergreen-d);
+    background:rgba(31,78,121,0.10); padding:5px 12px; border-radius:12px;
+    margin-bottom:2px;
+  }
+  .card-note{
+    font-family:var(--display); font-style:italic; font-size:15px; color:var(--ink);
+    border-left:3px solid var(--honey); padding-left:14px; margin:2px 0;
+  }
   .card{
     background:var(--card); border:1px solid var(--line); border-radius:20px;
     overflow:hidden; display:flex; flex-direction:column; gap:0;
@@ -309,7 +321,33 @@
 
   @media (max-width:800px){ .project-grid{ grid-template-columns:1fr; } }
 
-  /* ---------- EDUCATION ---------- */
+  /* ---------- LIVE DEMO ---------- */
+  .demo-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:36px; box-shadow:0 2px 12px rgba(46,42,34,0.04);
+  }
+  .demo-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .demo-field{ display:flex; flex-direction:column; gap:6px; }
+  .demo-field label{ font-size:13px; font-weight:500; color:var(--ink-soft); }
+  .demo-field input{
+    font-family:var(--mono); font-size:14px; padding:10px 12px;
+    border:1.5px solid var(--line); border-radius:10px; background:var(--paper);
+    color:var(--ink); transition:border-color 0.2s ease;
+  }
+  .demo-field input:focus{ outline:none; border-color:var(--evergreen); }
+  .demo-field .demo-range{ font-size:11px; color:var(--ink-soft); opacity:0.75; }
+  .demo-result{ margin-top:22px; }
+  .demo-result-box{
+    display:flex; align-items:center; gap:14px;
+    padding:18px 22px; border-radius:14px; font-family:var(--display); font-weight:600; font-size:16px;
+    animation:demo-pop 0.35s ease;
+  }
+  @keyframes demo-pop{ from{ opacity:0; transform:scale(0.96); } to{ opacity:1; transform:scale(1); } }
+  .demo-normal{ background:rgba(31,78,121,0.10); color:var(--evergreen-d); }
+  .demo-anomaly{ background:rgba(217,142,63,0.16); color:#8a5a1f; }
+  .demo-sub{ font-size:13px; font-weight:400; color:var(--ink-soft); margin-top:4px; }
+
+  @media (max-width:760px){ .demo-grid{ grid-template-columns:1fr; } }
   .timeline{ border-left:2px solid var(--line); padding-left:32px; }
   .timeline-item{ position:relative; padding-bottom:36px; }
   .timeline-item:last-child{ padding-bottom:0; }
@@ -421,6 +459,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#demo">Live Demo</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="cv.pdf">CV</a></li>
@@ -570,6 +609,27 @@
     </div>
   </section>
 
+  <!-- ================= LIVE DEMO ================= -->
+  <section class="section section-alt" id="demo">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="section-eyebrow">Try it live</p>
+        <h2 class="section-title">Engine anomaly detector</h2>
+        <p class="section-sub">
+          A simplified, in-browser version of the IQR method from my
+          <a href="https://github.com/Nithuran/predictive-maintenance-anomaly-detection" target="_blank" rel="noopener" style="color:var(--evergreen-d); font-weight:500;">anomaly detection notebook</a>.
+          Enter engine readings below - if two or more values fall outside a typical range, it's flagged as anomalous, exactly like the real analysis. This runs entirely in your browser; nothing is sent anywhere.
+        </p>
+      </div>
+
+      <div class="demo-card reveal reveal-1">
+        <div class="demo-grid" id="demoInputs"></div>
+        <button class="btn btn-primary" id="demoCheckBtn" type="button" style="margin-top:24px;">Check for anomaly</button>
+        <div class="demo-result" id="demoResult"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= EXPERIENCE ================= -->
   <section class="section" id="experience">
     <div class="wrap">
@@ -697,6 +757,21 @@
    ============================================================ */
 const PROJECTS = [
   {
+    title: "Inchcape Vehicle Sales Forecasting",
+    result: "5.4% MAPE (Chile)",
+    description: "Modelling lead on a 6-person team project for Inchcape, building an independent forecasting pipeline for Peru and Chile that clearly beat the company's naive baseline.",
+    task: "Multi-country forecasting with macroeconomic drivers",
+    method: "VIF-based feature selection, lag optimisation, 4-model \"Grand Prix\" ranking, SARIMAX / XGBoost / PatchTSMixer / TimesFM, SHAP for interpretability",
+    data: "Monthly vehicle sales for Peru & Chile (2010–2025) + macro indicators",
+    tags: ["Python", "XGBoost", "PatchTSMixer", "SHAP", "Team Project"],
+    github: "https://github.com/Nithuran/inchcape-vehicle-sales-forecasting",
+    demo: "",
+    chart: "inchcape-forecast.jpg",
+    chartAlt: "Historical vehicle sales and forecast charts for Peru and Chile",
+    featured: true,
+    note: "The closest thing I've done to real client work: an actual company, a live problem, a team to coordinate with, and a result that had to hold up against their own internal forecasts, not just a coursework rubric."
+  },
+  {
     title: "Forecasting Children's & Fiction Book Sales",
     result: "13.0% MAPE",
     description: "Forecasted 24 years of weekly UK sales for two very different titles - The Very Hungry Caterpillar and The Alchemist - comparing a classical statistical model against gradient boosting.",
@@ -708,19 +783,6 @@ const PROJECTS = [
     demo: "",
     chart: "book-sales-forecast.jpg",
     chartAlt: "12-week sales forecast for The Alchemist showing recent sales and forecasted values"
-  },
-  {
-    title: "Inchcape Vehicle Sales Forecasting",
-    result: "5.4% MAPE (Chile)",
-    description: "Modelling lead on a 6-person team project for Inchcape, building an independent forecasting pipeline for Peru and Chile that clearly beat the company's naive baseline.",
-    task: "Multi-country forecasting with macroeconomic drivers",
-    method: "VIF-based feature selection, lag optimisation, 4-model \"Grand Prix\" ranking, SARIMAX / XGBoost / PatchTSMixer / TimesFM, SHAP for interpretability",
-    data: "Monthly vehicle sales for Peru & Chile (2010–2025) + macro indicators",
-    tags: ["Python", "XGBoost", "PatchTSMixer", "SHAP", "Team Project"],
-    github: "https://github.com/Nithuran/inchcape-vehicle-sales-forecasting",
-    demo: "",
-    chart: "inchcape-forecast.jpg",
-    chartAlt: "Historical vehicle sales and forecast charts for Peru and Chile"
   },
   {
     title: "PureGym Review Intelligence",
@@ -781,15 +843,20 @@ function projectCard(p, i){
   const demoLink = p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener">Live demo →</a>` : "";
   const delay = (i % 4) + 1;
   const chartBlock = p.chart ? `<div class="card-chart"><img src="${p.chart}" alt="${p.chartAlt || p.title + ' result chart'}" loading="lazy"></div>` : "";
+  const featuredClass = p.featured ? " card-featured" : "";
+  const featuredBadge = p.featured ? `<span class="featured-badge">★ Featured</span>` : "";
+  const noteBlock = p.note ? `<p class="card-note">"${p.note}"</p>` : "";
   return `
-    <div class="card reveal reveal-${delay}">
+    <div class="card reveal reveal-${delay}${featuredClass}">
       ${chartBlock}
       <div class="card-body">
+        ${featuredBadge}
         <div class="card-top">
           <h3 class="card-title">${p.title}</h3>
           <span class="result-badge">${p.result}</span>
         </div>
         <p class="card-desc">${p.description}</p>
+        ${noteBlock}
         <div class="card-meta">
           <span><b>Task -</b> ${p.task}</span>
           <span><b>Method -</b> ${p.method}</span>
@@ -808,6 +875,72 @@ function projectCard(p, i){
 }
 
 document.getElementById("project-grid").innerHTML = PROJECTS.map(projectCard).join("");
+
+/* ---------- live anomaly detector demo ---------- */
+/* Simplified illustrative version of the IQR method from the anomaly detection
+   notebook: typical ranges approximated from that project's own distributions.
+   Flags a reading as anomalous when 2+ features fall outside their typical range -
+   the same threshold rule used in the real analysis. This is a browser-side
+   illustration of the approach, not the trained model itself. */
+const DEMO_FEATURES = [
+  { key: "rpm", label: "Engine RPM", unit: "", min: 400, max: 1600, placeholder: "e.g. 750" },
+  { key: "lubOil", label: "Lub Oil Pressure", unit: "psi", min: 1.5, max: 5.5, placeholder: "e.g. 3.2" },
+  { key: "fuel", label: "Fuel Pressure", unit: "psi", min: 2, max: 12, placeholder: "e.g. 6.5" },
+  { key: "coolantPressure", label: "Coolant Pressure", unit: "psi", min: 1, max: 7, placeholder: "e.g. 4.0" },
+  { key: "lubTemp", label: "Lub Oil Temp", unit: "°C", min: 70, max: 90, placeholder: "e.g. 80" },
+  { key: "coolantTemp", label: "Coolant Temp", unit: "°C", min: 70, max: 95, placeholder: "e.g. 82" },
+];
+
+const demoInputsEl = document.getElementById("demoInputs");
+if (demoInputsEl) {
+  demoInputsEl.innerHTML = DEMO_FEATURES.map(f => `
+    <div class="demo-field">
+      <label for="demo-${f.key}">${f.label}${f.unit ? " (" + f.unit + ")" : ""}</label>
+      <input type="number" step="any" id="demo-${f.key}" placeholder="${f.placeholder}">
+      <span class="demo-range">Typical range: ${f.min}-${f.max}</span>
+    </div>
+  `).join("");
+}
+
+const demoBtn = document.getElementById("demoCheckBtn");
+const demoResultEl = document.getElementById("demoResult");
+if (demoBtn && demoResultEl) {
+  demoBtn.addEventListener("click", () => {
+    let outlierCount = 0;
+    let outlierNames = [];
+    let filledCount = 0;
+
+    DEMO_FEATURES.forEach(f => {
+      const raw = document.getElementById(`demo-${f.key}`).value;
+      if (raw === "") return;
+      filledCount++;
+      const val = parseFloat(raw);
+      if (val < f.min || val > f.max) {
+        outlierCount++;
+        outlierNames.push(f.label);
+      }
+    });
+
+    if (filledCount === 0) {
+      demoResultEl.innerHTML = `<div class="demo-result-box demo-normal">Enter at least one reading above to test it.</div>`;
+      return;
+    }
+
+    if (outlierCount >= 2) {
+      demoResultEl.innerHTML = `
+        <div class="demo-result-box demo-anomaly">
+          ⚠️ Anomaly flagged
+          <div class="demo-sub">${outlierCount} readings outside typical range: ${outlierNames.join(", ")}. In the real notebook, this pattern is what Isolation Forest was trained to catch.</div>
+        </div>`;
+    } else {
+      demoResultEl.innerHTML = `
+        <div class="demo-result-box demo-normal">
+          ✓ Normal operating range
+          <div class="demo-sub">${outlierCount} reading${outlierCount === 1 ? "" : "s"} outside typical range - below the 2-feature threshold used to flag anomalies.</div>
+        </div>`;
+    }
+  });
+}
 
 /* ---------- email icon: copy to clipboard as a fallback ---------- */
 const emailIcon = document.getElementById("emailIcon");
